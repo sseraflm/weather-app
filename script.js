@@ -6,34 +6,39 @@ let resultContainer = document.getElementById("result");
 
 async function fetchWeatherData() {
     try {
-        let city = cityNameInput.value;
+        let city = cityNameInput.value.trim();
+        if (city === "") {
+            createError("The input is empty.");
+            return;
+        }
         let response = await fetch(
             `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`,
         );
 
         if (!response.ok) {
             createError("Failed to fetch city data.");
-        } else {
-            let cityData = await response.json();
-            if (!cityData.results) {
-                createError("Failed to get the city.");
-            } else {
-                let latitude = cityData.results[0].latitude;
-                let longitude = cityData.results[0].longitude;
-
-                let weatherResponse = await fetch(
-                    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m`,
-                );
-                if (!weatherResponse.ok) {
-                    createError("Failed to fetch weather data.");
-                } else {
-                    let weatherData = await weatherResponse.json();
-                    createWeatherElements(cityData, weatherData);
-                }
-            }
+            return;
         }
+        let cityData = await response.json();
+        if (!cityData.results) {
+            createError("Failed to get the city.");
+            return;
+        }
+        let latitude = cityData.results[0].latitude;
+        let longitude = cityData.results[0].longitude;
+
+        let weatherResponse = await fetch(
+            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m`,
+        );
+        if (!weatherResponse.ok) {
+            createError("Failed to fetch weather data.");
+            return;
+        }
+        let weatherData = await weatherResponse.json();
+        createWeatherElements(cityData, weatherData);
     } catch (error) {
         createError("Something went wrong.");
+        return;
     }
 }
 
