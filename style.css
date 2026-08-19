@@ -34,10 +34,26 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 10px;
 }
 .weather-card {
     text-align: center;
     border: 3px solid #818cf8;
     border-radius: 10px;
     padding: 10px;
+}
+#history {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.history-item {
+    text-align: center;
+    border: 3px solid #818cf8;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
 }
