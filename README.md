@@ -6,7 +6,7 @@ A simple weather application built with JavaScript.
 
 ### Features
 
--Search for a city
+- Search for a city
 
 - Display city name, country and region
 
@@ -22,6 +22,14 @@ A simple weather application built with JavaScript.
 
 - Dynamic generation of weather cards
 
+- Save searched cities to LocalStorage
+
+- Display search history
+
+- Store up to 5 recent searches
+
+- Click a city from the search history to search for it again
+
 ### How does it work?
 
 Firstly the user enters a city name.
@@ -35,6 +43,14 @@ latitude and longitude are then used to make a second request to the Open-Meteo 
 The application then retrieves the current temperature from the API.
 
 Then the city and weather data are dynamically displayed on the page, errors are also handled if the API request fails or the city cannot be found.
+
+After a successful search, the application creates a history object containing the city name, the data time and temperature durning that time, the object is added to the search history and the history is limited to the 5 most recent searches.
+
+The search history is converted to JSON and saved to LocalStorage.
+
+When the application starts, the saved history is loaded from LocalStorage and dynamically displayed on the page.
+
+Each history item has the ability to be clicked to quickly search for a city again.
 
 ### Technologies
 
@@ -50,8 +66,5 @@ Then the city and weather data are dynamically displayed on the page, errors are
 
 ### Plans for the future
 
-- Improve input validation
-
 - Improve the UI
-
 - Add more detailed weather information
