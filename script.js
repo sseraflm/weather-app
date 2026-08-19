@@ -3,6 +3,10 @@
 const cityNameInput = document.getElementById("cityName");
 const submitButton = document.getElementById("submitCity");
 const resultContainer = document.getElementById("result");
+const historyContainer = document.getElementById("history");
+let dataHistory = {
+    searches: [],
+};
 
 async function fetchWeatherData() {
     try {
@@ -36,7 +40,20 @@ async function fetchWeatherData() {
         }
         const weatherData = await weatherResponse.json();
         createWeatherElements(cityData, weatherData);
-    } catch (error) {
+
+        const historyObject = {
+            city: cityData.results[0].name,
+            time: weatherData.current.time,
+            temperature: weatherData.current.temperature_2m,
+        };
+        dataHistory.searches.unshift(historyObject);
+        if (dataHistory.searches.length > 5) {
+            dataHistory.searches.pop();
+        }
+        let JSONDataHistory = JSON.stringify(dataHistory);
+        localStorage.setItem("History", JSONDataHistory);
+        createHistoryElements();
+    } catch {
         createError("Something went wrong.");
         return;
     }
@@ -96,3 +113,53 @@ function createError(textToShow) {
 }
 
 submitButton.addEventListener("click", fetchWeatherData);
+
+function loadHistory() {
+    let JSONDataHistory = localStorage.getItem("History");
+    if (JSONDataHistory === null) {
+        return;
+    }
+    let parsedDataHistory = JSON.parse(JSONDataHistory);
+    dataHistory = parsedDataHistory;
+
+    createHistoryElements();
+}
+
+function createHistoryElements() {
+    historyContainer.innerText = "";
+
+    for (const search of dataHistory.searches) {
+        const historyItem = document.createElement("div");
+        historyItem.classList.add("history-item");
+        historyItem.dataset.city = search.city;
+
+        const historyCityName = document.createElement("h1");
+        historyCityName.innerText = search.city;
+        historyCityName.classList.add("history-City");
+
+        const dataTime = document.createElement("p");
+        dataTime.innerText = `Data time: ${search.time}`;
+        dataTime.classList.add("history-date");
+
+        const cityTemperature = document.createElement("p");
+        cityTemperature.innerText = `Temperature during the date: ${search.temperature}`;
+        cityTemperature.classList.add("history-temp");
+
+        historyItem.append(historyCityName, dataTime, cityTemperature);
+        historyContainer.append(historyItem);
+    }
+}
+
+loadHistory();
+
+function handleHistoryClick(event) {
+    let historyItem = event.target.closest(".history-item");
+    if (!historyItem) {
+        return;
+    }
+    let cityName = historyItem.dataset.city;
+    cityNameInput.value = cityName;
+    fetchWeatherData();
+}
+
+historyContainer.addEventListener("click", handleHistoryClick);
