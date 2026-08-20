@@ -114,6 +114,8 @@ function createError(textToShow) {
 
 submitButton.addEventListener("click", fetchWeatherData);
 
+// Search history
+
 function loadHistory() {
     let JSONDataHistory = localStorage.getItem("History");
     if (JSONDataHistory === null) {
@@ -163,3 +165,75 @@ function handleHistoryClick(event) {
 }
 
 historyContainer.addEventListener("click", handleHistoryClick);
+
+// Quick search
+const quickSearchContainer = document.getElementById("quickSearch");
+const addToQuickSearchButton = document.getElementById("submitQuickSearch");
+let quickSearch = [];
+
+function addToQuickSearch() {
+    if (cityNameInput.value.trim() === "") {
+        return;
+    }
+    let cityName = cityNameInput.value.trim();
+    if (quickSearch.some(city => city === cityName)) {
+        return;
+    }
+    quickSearch.push(cityName);
+    const jsonQuickSearch = JSON.stringify(quickSearch);
+    localStorage.setItem("quickSearch", jsonQuickSearch);
+    cityNameInput.value = "";
+    loadQuickSearch();
+}
+
+addToQuickSearchButton.addEventListener("click", addToQuickSearch);
+
+function createQuickSearchElement() {
+    quickSearch.forEach(city => {
+        const quickSearchDiv = document.createElement("div");
+        quickSearchDiv.classList.add("quick-search-div");
+
+        const quickSearchCity = document.createElement("p");
+        quickSearchCity.innerText = city;
+        quickSearchCity.classList.add("quick-search-city");
+        quickSearchCity.addEventListener("click", quickSearchCityData);
+
+        const quickSearchDeleteButton = document.createElement("button");
+        quickSearchDeleteButton.innerText = "Delete city.";
+        quickSearchDeleteButton.classList.add("quick-search-delete");
+        quickSearchDeleteButton.addEventListener("click", removeFromQuickSearch);
+
+        quickSearchDiv.append(quickSearchCity, quickSearchDeleteButton);
+        quickSearchContainer.append(quickSearchDiv);
+    });
+}
+
+function removeFromQuickSearch(event) {
+    let foundDiv = event.target.closest(".quick-search-div");
+    let cityP = foundDiv.querySelector(".quick-search-city").innerText;
+    if (quickSearch.some(city => city === cityP)) {
+        quickSearch = quickSearch.filter(city => city !== cityP);
+        let jsonQuickSearch = JSON.stringify(quickSearch);
+        localStorage.setItem("quickSearch", jsonQuickSearch);
+        loadQuickSearch();
+    }
+}
+
+function loadQuickSearch() {
+    let jsonQuickSearch = localStorage.getItem("quickSearch");
+    quickSearchContainer.innerText = "";
+    if (jsonQuickSearch === null) {
+        return;
+    }
+    const quickSearchData = JSON.parse(jsonQuickSearch);
+    quickSearch = quickSearchData;
+    createQuickSearchElement();
+}
+loadQuickSearch();
+
+function quickSearchCityData(event) {
+    let foundDiv = event.target.closest(".quick-search-div");
+    let cityP = foundDiv.querySelector(".quick-search-city").innerText;
+    cityNameInput.value = cityP;
+    fetchWeatherData();
+}
