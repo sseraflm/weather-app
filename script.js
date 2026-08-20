@@ -50,7 +50,7 @@ async function fetchWeatherData() {
         if (dataHistory.searches.length > 5) {
             dataHistory.searches.pop();
         }
-        let JSONDataHistory = JSON.stringify(dataHistory);
+        const JSONDataHistory = JSON.stringify(dataHistory);
         localStorage.setItem("History", JSONDataHistory);
         createHistoryElements();
     } catch {
@@ -117,11 +117,11 @@ submitButton.addEventListener("click", fetchWeatherData);
 // Search history
 
 function loadHistory() {
-    let JSONDataHistory = localStorage.getItem("History");
+    const JSONDataHistory = localStorage.getItem("History");
     if (JSONDataHistory === null) {
         return;
     }
-    let parsedDataHistory = JSON.parse(JSONDataHistory);
+    const parsedDataHistory = JSON.parse(JSONDataHistory);
     dataHistory = parsedDataHistory;
 
     createHistoryElements();
@@ -155,11 +155,11 @@ function createHistoryElements() {
 loadHistory();
 
 function handleHistoryClick(event) {
-    let historyItem = event.target.closest(".history-item");
+    const historyItem = event.target.closest(".history-item");
     if (!historyItem) {
         return;
     }
-    let cityName = historyItem.dataset.city;
+    const cityName = historyItem.dataset.city;
     cityNameInput.value = cityName;
     fetchWeatherData();
 }
@@ -175,7 +175,7 @@ function addToQuickSearch() {
     if (cityNameInput.value.trim() === "") {
         return;
     }
-    let cityName = cityNameInput.value.trim();
+    const cityName = cityNameInput.value.trim();
     if (quickSearch.some(city => city === cityName)) {
         return;
     }
@@ -209,18 +209,18 @@ function createQuickSearchElement() {
 }
 
 function removeFromQuickSearch(event) {
-    let foundDiv = event.target.closest(".quick-search-div");
-    let cityP = foundDiv.querySelector(".quick-search-city").innerText;
+    const foundDiv = event.target.closest(".quick-search-div");
+    const cityP = foundDiv.querySelector(".quick-search-city").innerText;
     if (quickSearch.some(city => city === cityP)) {
         quickSearch = quickSearch.filter(city => city !== cityP);
-        let jsonQuickSearch = JSON.stringify(quickSearch);
+        const jsonQuickSearch = JSON.stringify(quickSearch);
         localStorage.setItem("quickSearch", jsonQuickSearch);
         loadQuickSearch();
     }
 }
 
 function loadQuickSearch() {
-    let jsonQuickSearch = localStorage.getItem("quickSearch");
+    const jsonQuickSearch = localStorage.getItem("quickSearch");
     quickSearchContainer.innerText = "";
     if (jsonQuickSearch === null) {
         return;
@@ -232,8 +232,8 @@ function loadQuickSearch() {
 loadQuickSearch();
 
 function quickSearchCityData(event) {
-    let foundDiv = event.target.closest(".quick-search-div");
-    let cityP = foundDiv.querySelector(".quick-search-city").innerText;
+    const foundDiv = event.target.closest(".quick-search-div");
+    const cityP = foundDiv.querySelector(".quick-search-city").innerText;
     cityNameInput.value = cityP;
     fetchWeatherData();
 }
