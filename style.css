@@ -57,3 +57,26 @@ body {
     padding: 10px;
     cursor: pointer;
 }
+#quickSearchMain {
+    position: absolute;
+    top: 65px;
+    right: 60px;
+    text-align: center;
+    border: 3px solid #818cf8;
+    padding: 10px;
+    border-radius: 10px;
+    width: 150px;
+}
+
+.quick-search-delete {
+    background-color: #818cf8;
+    border: 2px solid #eff6ff;
+    border-radius: 20px;
+    color: #1f2937;
+    text-align: center;
+}
+
+.quick-search-city {
+    font-weight: bold;
+    cursor: pointer;
+}
