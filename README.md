@@ -30,6 +30,10 @@ A simple weather application built with JavaScript.
 
 - Click a city from the search history to search for it again
 
+- Save city names into quick search menu.
+
+- Click city names in quick search menu to quickly search for them.
+
 ### How does it work?
 
 Firstly the user enters a city name.
@@ -51,6 +55,8 @@ The search history is converted to JSON and saved to LocalStorage.
 When the application starts, the saved history is loaded from LocalStorage and dynamically displayed on the page.
 
 Each history item has the ability to be clicked to quickly search for a city again.
+
+You can also save city name's to the quick search menu and click on them to quickly search for that city.
 
 ### Technologies
 
