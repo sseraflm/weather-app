@@ -80,3 +80,15 @@ body {
     font-weight: bold;
     cursor: pointer;
 }
+
+#submitQuickSearch {
+    background-color: #818cf8;
+    border: 2px solid #eff6ff;
+    border-radius: 20px;
+    color: #1f2937;
+    text-align: center;
+}
+
+button, input {
+    font-family: inherit;
+}
