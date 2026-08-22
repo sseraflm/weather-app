@@ -4,6 +4,8 @@
 
 A simple weather application built with JavaScript.
 
+Github pages link: https://sseraflm.github.io/weather-app/
+
 ### Features
 
 - Search for a city
@@ -30,9 +32,9 @@ A simple weather application built with JavaScript.
 
 - Click a city from the search history to search for it again
 
-- Save city names into quick search menu.
+- Save city names into quick search menu
 
-- Click city names in quick search menu to quickly search for them.
+- Click city names in quick search menu to quickly search for them
 
 ### How does it work?
 
@@ -48,7 +50,7 @@ The application then retrieves the current temperature from the API.
 
 Then the city and weather data are dynamically displayed on the page, errors are also handled if the API request fails or the city cannot be found.
 
-After a successful search, the application creates a history object containing the city name, the data time and temperature durning that time, the object is added to the search history and the history is limited to the 5 most recent searches.
+After a successful search, the application creates a history object containing the city name, the data time and temperature during that time, the object is added to the search history and the history is limited to the 5 most recent searches.
 
 The search history is converted to JSON and saved to LocalStorage.
 
@@ -74,3 +76,7 @@ You can also save city name's to the quick search menu and click on them to quic
 
 - Improve the UI
 - Add more detailed weather information
+
+### Github Pages Link
+
+- https://sseraflm.github.io/weather-app/
