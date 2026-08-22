@@ -80,6 +80,3 @@ You can also save city name's to the quick search menu and click on them to quic
 - Improve the UI
 - Add more detailed weather information
 
-### Github Pages Link
-
-- https://sseraflm.github.io/weather-app/
