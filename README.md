@@ -1,3 +1,4 @@
+
 # weather-app
 
 ### About
@@ -5,6 +6,8 @@
 A simple weather application built with JavaScript.
 
 Github pages link: https://sseraflm.github.io/weather-app/
+
+<img width="1732" height="915" alt="weatherApp" src="https://github.com/user-attachments/assets/a213487d-7543-4398-bb51-3a4c05b74067" />
 
 ### Features
 
