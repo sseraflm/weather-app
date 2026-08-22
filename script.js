@@ -15,8 +15,11 @@ async function fetchWeatherData() {
             createError("The input is empty.");
             return;
         }
+        submitButton.disabled = true;
+        submitButton.innerText = "Fetching the data.."
+        submitButton.classList.add("Locked-btn")
         const response = await fetch(
-            `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`,
+            `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`,
         );
 
         if (!response.ok) {
@@ -56,6 +59,11 @@ async function fetchWeatherData() {
     } catch {
         createError("Something went wrong.");
         return;
+    }
+    finally {
+        submitButton.disabled = false;
+        submitButton.classList.remove("Locked-btn")
+        submitButton.innerText = "Get the data."
     }
 }
 
@@ -196,21 +204,24 @@ function createQuickSearchElement() {
         const quickSearchCity = document.createElement("p");
         quickSearchCity.innerText = city;
         quickSearchCity.classList.add("quick-search-city");
-        quickSearchCity.addEventListener("click", quickSearchCityData);
 
         const quickSearchDeleteButton = document.createElement("button");
         quickSearchDeleteButton.innerText = "Delete city.";
         quickSearchDeleteButton.classList.add("quick-search-delete");
-        quickSearchDeleteButton.addEventListener("click", removeFromQuickSearch);
 
         quickSearchDiv.append(quickSearchCity, quickSearchDeleteButton);
         quickSearchContainer.append(quickSearchDiv);
     });
 }
 
-function removeFromQuickSearch(event) {
-    const foundDiv = event.target.closest(".quick-search-div");
-    const cityP = foundDiv.querySelector(".quick-search-city").innerText;
+
+function quickSearchHandler(event) {
+    if (event.target.classList.contains("quick-search-city")) {
+    const cityP = event.target.innerText;
+    cityNameInput.value = cityP;
+    fetchWeatherData();
+    } else if (event.target.classList.contains("quick-search-delete")) {
+    const cityP = event.target.previousElementSibling.innerText
     if (quickSearch.some(city => city === cityP)) {
         quickSearch = quickSearch.filter(city => city !== cityP);
         const jsonQuickSearch = JSON.stringify(quickSearch);
@@ -218,7 +229,7 @@ function removeFromQuickSearch(event) {
         loadQuickSearch();
     }
 }
-
+}
 function loadQuickSearch() {
     const jsonQuickSearch = localStorage.getItem("quickSearch");
     quickSearchContainer.innerText = "";
@@ -231,9 +242,4 @@ function loadQuickSearch() {
 }
 loadQuickSearch();
 
-function quickSearchCityData(event) {
-    const foundDiv = event.target.closest(".quick-search-div");
-    const cityP = foundDiv.querySelector(".quick-search-city").innerText;
-    cityNameInput.value = cityP;
-    fetchWeatherData();
-}
+quickSearchContainer.addEventListener("click", quickSearchHandler)
