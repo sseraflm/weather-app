@@ -37,7 +37,7 @@ class WeatherService {
 }
 
 
-`class UIManager {
+class UIManager {
 
     #cityNameInput;
     #submitButton;
@@ -178,7 +178,7 @@ class WeatherService {
         return city;
     }
 }
-`
+
 class StorageManager {
     constructor() {
         this.historyKey = "History"
