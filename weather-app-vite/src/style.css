@@ -1,0 +1,94 @@
+body {
+    background-color: #a5b4fc;
+    color: #1f2937;
+    font-family: "Courier New", Courier, monospace;
+}
+#appHeader {
+    text-align: center;
+}
+
+#inputCity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 3px;
+}
+#cityName {
+    background-color: #818cf8;
+    color: #1f2937;
+    height: 25px;
+    border-radius: 20px;
+    text-align: center;
+    border: 2px solid #eff6ff;
+}
+#submitCity {
+    background-color: #818cf8;
+    border: 2px solid #eff6ff;
+    border-radius: 20px;
+    color: #1f2937;
+    text-align: center;
+}
+
+#result {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+.weather-card {
+    text-align: center;
+    border: 3px solid #818cf8;
+    border-radius: 10px;
+    padding: 10px;
+}
+#history {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.history-item {
+    text-align: center;
+    border: 3px solid #818cf8;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+#quickSearchMain {
+    position: absolute;
+    top: 65px;
+    right: 60px;
+    text-align: center;
+    border: 3px solid #818cf8;
+    padding: 10px;
+    border-radius: 10px;
+    width: 150px;
+}
+
+.quick-search-delete {
+    background-color: #818cf8;
+    border: 2px solid #eff6ff;
+    border-radius: 20px;
+    color: #1f2937;
+    text-align: center;
+}
+
+.quick-search-city {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#submitQuickSearch {
+    background-color: #818cf8;
+    border: 2px solid #eff6ff;
+    border-radius: 20px;
+    color: #1f2937;
+    text-align: center;
+}
+
+button, input {
+    font-family: inherit;
+}
