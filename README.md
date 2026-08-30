@@ -63,6 +63,18 @@ Each history item has the ability to be clicked to quickly search for a city aga
 
 You can also save city name's to the quick search menu and click on them to quickly search for that city.
 
+### Architecture 
+
+The application is organized into three classes each responsible for a single concern.
+
+- `WeatherService` handles communication with the Open-Meteo APIs
+
+- `UIManager` handles all DOM manipulation and rendering
+
+- `StorageManager` handles reading from and writing to LocalStorage
+
+These three classes are imported and coordinated together in `main.js`.
+
 ### Technologies
 
 - HTML
@@ -71,9 +83,25 @@ You can also save city name's to the quick search menu and click on them to quic
 
 - JavaScript
 
+- Vite
+
 - Open-Meteo Geocoding API
 
 - Open-Meteo Forecast API
+
+### Running locally
+
+1. Clone the repository
+
+2. Install dependencies:
+
+`npm install`
+
+3. Start the dev server:
+
+`npm run dev`
+
+4. Open the URL shown in the terminal.
 
 ### Plans for the future
 
