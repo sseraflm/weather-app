@@ -1,0 +1,26 @@
+@use "variables" as v;
+@use "mixins" as m;
+body {
+  background-color: v.$bg-main;
+  color: v.$text-color;
+  font-family: v.$font-main;
+}
+#appHeader {
+  text-align: center;
+}
+#inputCity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 3px;
+}
+#result {
+  @include m.flex-center;
+  padding: v.$padding-base;
+}
+#history {
+  @include m.flex-center;
+  flex-direction: column;
+  gap: 10px;
+}
