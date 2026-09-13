@@ -1,4 +1,3 @@
-
 # weather-app
 
 ### About
@@ -63,7 +62,7 @@ Each history item has the ability to be clicked to quickly search for a city aga
 
 You can also save city name's to the quick search menu and click on them to quickly search for that city.
 
-### Architecture 
+### Architecture
 
 The application is organized into three classes each responsible for a single concern.
 
@@ -73,13 +72,27 @@ The application is organized into three classes each responsible for a single co
 
 - `StorageManager` handles reading from and writing to LocalStorage
 
-These three classes are imported and coordinated together in `main.js`.
+These three classes are imported and coordinated together in `src/main.js`.
+
+### Styles
+
+Styles are written in SCSS and organized into partials `src/scss/`.
+
+- `_variables.scss` holds shared colors and other reusable values.
+
+- `_mixins.scss` holds reusable style patterns.
+
+- `_layout.scss` holds the page's overall structure.
+
+- `_components.scss` handle individual UI elements.
+
+All of the partials are combined in `src/scss/main.scss` which then gets imported into `src/main.js`
 
 ### Technologies
 
 - HTML
 
-- CSS
+- SCSS
 
 - JavaScript
 
@@ -107,4 +120,3 @@ These three classes are imported and coordinated together in `main.js`.
 
 - Improve the UI
 - Add more detailed weather information
-
